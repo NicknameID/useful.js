@@ -10,6 +10,8 @@ import {addListener,removeListener} from './EventListener.js';
 import drag from './drag.js';
 import startMove from './startMove.js';
 import rollMouse from './startMove.js';
+import Ajax from './ajax.js';
+import AjaxPromise from './ajaxPromise.js';
 
 
 let M = (function () {
@@ -25,12 +27,11 @@ let M = (function () {
   M.drag = drag;
   M.startMove = startMove;
   M.rollMouse = rollMouse;
+  M.Ajax = Ajax;
+  M.AjaxPromise = AjaxPromise;
 
 
 //---------------------
   return M;
 })();
 window.M = M;
-
-
-

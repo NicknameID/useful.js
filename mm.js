@@ -1,7 +1,8 @@
+/* exported M */
 var M = (function(){
 	var M = {};
 	// ------------------方法封装----------------------------------
-	
+
 	// 获取非行间样式，返回字符串，并且当传入第3个参数(要修改的值)，可以修改对象的样式。
 	M.getStyle = function getStyle(obj,name,value){
 		if(arguments>2){
@@ -26,7 +27,7 @@ var M = (function(){
 		}
 		function height(){
 			h = window.innerHeight ||
-			document.documentElement.clientHeight || 
+			document.documentElement.clientHeight ||
 			document.body.clientHeight;
 			return h;
 		}
@@ -36,12 +37,12 @@ var M = (function(){
 			width:width
 		};
 	})();
-	
+
 	//判断类数组的函数返回值为boolear
 	M.isArrayLike = function(collection){
 		var length = collection !== null && collection.length;
 		return typeof length == 'number' && length>=0;
-	}
+	};
 
 	// 1.封装DOM获取函数，通过className来获取元素。
 	// 2.返回值为数组
@@ -52,16 +53,16 @@ var M = (function(){
 			if( aEle[i].className.indexOf(sClass) !== -1 ) arr.push(aEle[i]);
 		}
 		return arr;
-	}
+	};
 
 	//获取浏览器的事件，使用时必须传入一个参数
 	M.getEvent = function(ev){
 		var oEv = ev || window.event; //后者为兼容IE浏览器
-			return oEv;
-	}
+		return oEv;
+	};
 
 	//添加监听事件的兼容方法addEvent
-	//兼容FF Chrome IE; 
+	//兼容FF Chrome IE;
 	M.addListener = function(obj,ev,fn){
 		if( obj.addEventListener) {
 			obj.addEventListener(ev,fn,false);
@@ -77,6 +78,43 @@ var M = (function(){
 		}else{
 			obj.detachEvent('on'+ev,fn);
 		}
+	};
+
+	M.AjaxPromise = function(url){
+    let promise =  new Promise(function(resolve, reject) {
+      let client = new XMLHttpRequest();
+      client.open('GET', url+'?t='+new Date().getTime(), true);
+      client.send();
+      client.onreadystatechange = handler;
+      function handler(){
+        if(this.readyState !== 4){
+          return;
+        }
+				if(this.readyState === 4){
+					if( this.status === 200 ){
+						resolve(this.response);
+					}else{
+						reject(new Error(this.statusText));
+					}
+				}
+      }
+    });
+    return promise;
+  };
+
+	M.Ajax = function Ajax(url,fnS,fnF){
+		let client = new XMLHttpRequest();
+		client.open('GET', url+'?t='+new Date().getTime(), true);
+		client.send();
+		client.readystatechange = function(){
+			if( client.readyState === 4 ){
+				if( client.status === 200 ){
+					fnS(client.response);
+				}else{
+					fnF(client.status);
+				}
+			}
+		};
 	};
 
 // ------------------运动函数封装-----------------------------------
@@ -104,7 +142,7 @@ var M = (function(){
 		// 运动函数Move()
 		return function(obj,width,height,fnEnd){
 			var startL = obj.offsetLeft;
-	 		var startT = obj.offsetTop;
+			var startT = obj.offsetTop;
 			// 添加鼠标按下事件
 			obj.onmousedown = function(ev){
 				// 获取当前对象的[x,y]坐标
@@ -125,13 +163,13 @@ var M = (function(){
 					obj.style.left = l + 'px';
 					obj.style.top = t + 'px';
 					if(fnEnd) fnEnd();
-				}
-			}
+				};
+			};
 			// 抬起鼠标左键，停下移动对象
 			window.onmouseup = function(){
 				window.onmousemove = false;
 			};
-		}
+		};
 	})();
 
 	//运动框架,参1为要运动的对象，参2位json类型的样式和值的键值对，参3为尾调函数
@@ -141,7 +179,7 @@ var M = (function(){
 			var bStop = true;  //每一调用一次开始假设，所有的值都已经到了
 			function Move(obj,json,endFunc){
 				var cur = 0;
-				for(attr in json){
+				for(let attr in json){
 					if(attr==='opacity'){
 						cur = Math.round(parseFloat(M.getStyle(obj,attr))*100);
 					}else{
@@ -155,11 +193,11 @@ var M = (function(){
 						bStop = false;
 					}
 					if(attr==='opacity'){ //判断要运动的属性是否是透明度
-							obj.style.filter = 'alpha(opacity:'+(cur+speed)+')';//IE兼容写法
-							obj.style.opacity = (cur+speed)/100;//FF&Chrome兼容
-						}else{
-							obj.style[attr] = cur + speed + 'px';//单步运动，调用一次改变一次位置
-						}
+						obj.style.filter = 'alpha(opacity:'+(cur+speed)+')';//IE兼容写法
+						obj.style.opacity = (cur+speed)/100;//FF&Chrome兼容
+					}else{
+						obj.style[attr] = cur + speed + 'px';//单步运动，调用一次改变一次位置
+					}
 				}
 				if(bStop===true){		//判断如果没有不到的
 					clearInterval(obj.timer);		//清除计时器
@@ -168,8 +206,8 @@ var M = (function(){
 			}
 			Move(obj,json,endFunc);//运行方法
 		},16);
-	}
-	
+	};
+
 	M.rollMouse = function(obj,funcUp,funcDown){
 		var str = window.navigator.userAgent.toLowerCase();
 		if( str.indexOf('firefox')!== -1 ){
@@ -190,9 +228,9 @@ var M = (function(){
 				}else if(oEv.wheelDelta == -120){
 					funcDown();
 				}
-			}
+			};
 		}
-	}
+	};
 //-----------------返回方法对象给全局----------------------------------
 	return M;
 })();
