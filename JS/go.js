@@ -12,9 +12,12 @@ import startMove from './startMove.js';
 import rollMouse from './startMove.js';
 import Ajax from './ajax.js';
 import AjaxPromise from './ajaxPromise.js';
+import setCookie from './setCookie.js';
+import getCookie from './getCookie.js';
+import delCookie from './delCookie.js';
 
 
-let M = (function () {
+const M = (function () {
   let M = {};
 //封装方法
   M.getStyle = getStyle;
@@ -29,7 +32,9 @@ let M = (function () {
   M.rollMouse = rollMouse;
   M.Ajax = Ajax;
   M.AjaxPromise = AjaxPromise;
-
+  M.setCookie = setCookie;
+  M.getCookie = getCookie;
+  M.delCookie = delCookie;
 
 //---------------------
   return M;
