@@ -15,6 +15,7 @@ import AjaxPromise from './ajaxPromise.js';
 import setCookie from './setCookie.js';
 import getCookie from './getCookie.js';
 import delCookie from './delCookie.js';
+import {Slider} from './slider-plugin.js';
 
 
 const M = (function () {
@@ -35,6 +36,7 @@ const M = (function () {
   M.setCookie = setCookie;
   M.getCookie = getCookie;
   M.delCookie = delCookie;
+  M.Slider = Slider;
 
 //---------------------
   return M;

@@ -33,8 +33,11 @@ module.exports = {
             "always"
         ],
         "no-unused-vars": [
-          "warn", 
+          "warn",
           { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
+        ],
+        "no-console": [
+          "error", { allow: ["warn", "error"] }
         ]
     }
 };

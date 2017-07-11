@@ -9,7 +9,7 @@ module.exports = {
     entry: __dirname + '/js/go.js',//入口js文件
     output: {
         path: __dirname + '/build',//打包后的存放文件夹
-        filename: "mm.js"
+        filename: 'mm.js',
     },
 
   devServer:{
