@@ -7,18 +7,14 @@
   }else{
     obj.attachEvent('on'+ev,fn);
   }
-};
+}
 
 function removeListener(obj,ev,fn){
   if( obj.removeEventListener ){
     obj.removeEventListener(ev,fn,false);
   }else{
     obj.detachEvent('on'+ev,fn);
-  };
+  }
 }
 
 export {addListener,removeListener};
-
-
-
-

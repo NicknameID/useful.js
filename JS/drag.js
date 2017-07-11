@@ -29,8 +29,8 @@ let drag = function(obj,width,height,fnEnd){
 
 
 	// 运动函数
-	 	let startL = obj.offsetLeft;
-	 	let startT = obj.offsetTop;
+		let startL = obj.offsetLeft;
+		let startT = obj.offsetTop;
 		// 添加鼠标按下事件
 		obj.onmousedown = function(ev){
 			// 获取当前对象的[x,y]坐标
@@ -51,7 +51,7 @@ let drag = function(obj,width,height,fnEnd){
 					obj.style.left = l + 'px';
 					obj.style.top = t + 'px';
 					if(fnEnd) fnEnd();
-			}
+			};
 		};
 		// 抬起鼠标左键，停下移动对象
 		window.onmouseup = function(){
@@ -60,14 +60,3 @@ let drag = function(obj,width,height,fnEnd){
 };
 
 export default drag;
-
-
-
-
-
-
-
-
-
-
-
