@@ -16,11 +16,12 @@ import setCookie from './setCookie.js';
 import getCookie from './getCookie.js';
 import delCookie from './delCookie.js';
 import {Slider} from './slider-plugin.js';
+import inherit from './inherit.js';
 
 
 const M = (function () {
   let M = {};
-//封装方法
+  //封装方法
   M.getStyle = getStyle;
   M.getWindow = getWindow;
   M.isArrayLike = isArrayLike;
@@ -37,6 +38,7 @@ const M = (function () {
   M.getCookie = getCookie;
   M.delCookie = delCookie;
   M.Slider = Slider;
+  M.inherit = inherit;
 
 //---------------------
   return M;

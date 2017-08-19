@@ -16,7 +16,7 @@ var M = (function(){
 		}
 	};
 
-	// 获取窗口尺寸
+	// 获取窗口尺寸 例子: M.getWindowSize.width();
 	M.getWindowSize = (function(){
 		var w, h;
 		function width(){
@@ -38,7 +38,7 @@ var M = (function(){
 		};
 	})();
 
-	//判断类数组的函数返回值为boolear
+	//判断类数组的函数返回值为boolear;
 	M.isArrayLike = function(collection){
 		var length = collection !== null && collection.length;
 		return typeof length == 'number' && length>=0;
@@ -80,6 +80,7 @@ var M = (function(){
 		}
 	};
 
+	// ajax方法
 	M.AjaxPromise = function(url){
     let promise =  new Promise(function(resolve, reject) {
       let client = new XMLHttpRequest();
@@ -116,6 +117,15 @@ var M = (function(){
 			}
 		};
 	};
+
+	// OO继承函数
+	M.inherit = function(child, parent){
+		var F = function(){};
+		F.prototype = parent.prototype;
+		child.prototype = new F();
+	}
+
+
 
 // ------------------运动函数封装-----------------------------------
 
