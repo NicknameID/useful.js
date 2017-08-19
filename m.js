@@ -125,6 +125,24 @@ var M = (function(){
 		child.prototype = new F();
 	}
 
+	// cookie设置
+	M.setCookie = function (name, value, day) {
+		var date = new Date();
+		date.setDate(date.getDate() + day);
+		document.cookie = '${name}=${value};expires=${date}';
+	}
+	M.getCookie = function (name) {
+		var arr = document.cookie.split('; ');
+		for (let i = 0; i < arr.length; i++) {
+			let arrs = arr[i].split('=');
+			if (arrs[0] == name) return arrs[1];
+		}
+		return '';
+	}
+	M.delCookie = function delCookie(name) {
+		M.setCookie(name, null, -1);
+	}
+
 
 
 // ------------------运动函数封装-----------------------------------
@@ -218,6 +236,7 @@ var M = (function(){
 		},16);
 	};
 
+	// 自定义鼠标滚动页面兼容方法
 	M.rollMouse = function(obj,funcUp,funcDown){
 		var str = window.navigator.userAgent.toLowerCase();
 		if( str.indexOf('firefox')!== -1 ){
@@ -241,6 +260,58 @@ var M = (function(){
 			};
 		}
 	};
+
+	// 轮播图插件
+	M.Slider = function(){
+		class Slider {
+			constructor(aImgs, slider, step) {
+				if (typeof aImgs.length !== 'number' && length < 0) { //保证输入的是一个类数组格式参数
+					console.error('first parameter is not a array');
+					return;
+				}
+				if (!$) { //因为插件依赖jQuery，防止没有依赖引起的报错问题
+					console.error('No jQuery dependency');
+					return;
+				}
+				this.aImgs = aImgs;
+				this.slider = slider;
+				this.step = step;
+				this.now = 0;
+				this.imgsLength = this.aImgs.length;
+			}
+
+			pre(jStyleNew, jStyleOld) {
+				if (!$(this.slider).is(':animated')) {
+					this.now--;
+					if (this.now < 0) this.now = this.imgsLength - 1;
+					$(this.aImgs).eq(this.now).css(jStyleNew)
+						.siblings().css(jStyleOld);
+					$(this.slider).animate({ 'left': -this.now * this.step + 'px' }, 500);
+				}
+			}
+
+			next(jStyleNew, jStyleOld) {
+				if (!$(this.slider).is(':animated')) {
+					this.now++;
+					if (this.now > this.imgsLength - 1) this.now = 0;
+					$(this.aImgs).css(jStyleNew)
+						.siblings().css(jStyleOld);
+					$(this.aImgs).eq(this.now).css(jStyleNew);
+					$(this.slider).animate({ 'left': -this.now * this.step + 'px' }, 500);
+				}
+			}
+
+			point(ev, jStyleNew, jStyleOld) {
+				// var ev = ev || window.event;
+				if (!$(this.slider).is(':animated')) {
+					var which = $(ev.target).index();
+					$(ev.target).css(jStyleNew).siblings().css(jStyleOld);
+					$(this.slider).animate({ 'left': -which * this.step + 'px' }, 500);
+				}
+			}
+		}
+		return Slider;
+	}
 //-----------------返回方法对象给全局----------------------------------
 	return M;
 })();
