@@ -123,14 +123,15 @@ var M = (function(){
 		var F = function(){};
 		F.prototype = parent.prototype;
 		child.prototype = new F();
-	}
+		child.prototype.constructor = child;
+	};
 
 	// cookie设置
 	M.setCookie = function (name, value, day) {
 		var date = new Date();
 		date.setDate(date.getDate() + day);
 		document.cookie = '${name}=${value};expires=${date}';
-	}
+	};
 	M.getCookie = function (name) {
 		var arr = document.cookie.split('; ');
 		for (let i = 0; i < arr.length; i++) {
@@ -138,10 +139,10 @@ var M = (function(){
 			if (arrs[0] == name) return arrs[1];
 		}
 		return '';
-	}
+	};
 	M.delCookie = function delCookie(name) {
 		M.setCookie(name, null, -1);
-	}
+	};
 
 
 
