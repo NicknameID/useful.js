@@ -17,6 +17,7 @@ import getCookie from './getCookie.js';
 import delCookie from './delCookie.js';
 import {Slider} from './slider-plugin.js';
 import inherit from './inherit.js';
+import getScreenXY from './getScreenXY.js';
 
 
 const M = (function () {
@@ -39,6 +40,7 @@ const M = (function () {
   M.delCookie = delCookie;
   M.Slider = Slider;
   M.inherit = inherit;
+  M.getScreenXY = getScreenXY;
 
 //---------------------
   return M;

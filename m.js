@@ -144,6 +144,18 @@ var M = (function(){
 		M.setCookie(name, null, -1);
 	};
 
+	// 获取浏览器窗口距离屏幕的距离的值（兼容）
+	M.getScreenXY = function(){
+		var leftPos = (typeof window.screenLeft == 'number')?
+								window.screenLeft : window.screenX;
+		var topPos = (typeof window.screenTop == 'number')?
+								window.screenTop : window.screenY;
+		return {
+			X:leftPos,
+			Y:topPos,
+		};
+	}
+
 
 
 // ------------------运动函数封装-----------------------------------
