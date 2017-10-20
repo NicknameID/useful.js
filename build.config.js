@@ -7,7 +7,7 @@
 let webpack = require('webpack');
 module.exports = {
 
-  entry: __dirname + '/js/go.js',//入口js文件
+  entry: __dirname + '/js/index.js',//入口js文件
   output: {
     path: __dirname + '/dist',//打包后的存放文件夹
     filename: "m.min.js"
