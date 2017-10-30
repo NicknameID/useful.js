@@ -18,6 +18,7 @@ import delCookie from './delCookie.js';
 import {Slider} from './slider-plugin.js';
 import inherit from './inherit.js';
 import getScreenXY from './getScreenXY.js';
+import walker from "./DOM_Iterator.js";
 
 
 const M = (function () {
@@ -41,8 +42,9 @@ const M = (function () {
   M.Slider = Slider;
   M.inherit = inherit;
   M.getScreenXY = getScreenXY;
+  M.NodeWalker = walker;
 
 //---------------------
   return M;
-})();
+})(window, document);
 window.M = M;

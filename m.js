@@ -154,7 +154,19 @@ var M = (function(){
 			X:leftPos,
 			Y:topPos,
 		};
-	}
+	};
+
+	// DOM节点的迭代器，只要传入一个根节点，和可选的过滤器就可以循环出所有该根节点下的后代节点
+	M.NodeWalker = function(root,filter=null){
+		var walker = document.createTreeWalker(root, NodeFilter.SHOW_ELEMENT, filter, false);
+		var node = walker.nextNode();
+		var result = [];
+		while (node !== null) {
+			result.push(node);
+			node = walker.nextNode();
+		}
+		return result;
+	};
 
 
 
