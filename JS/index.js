@@ -19,6 +19,7 @@ import {Slider} from './slider-plugin.js';
 import inherit from './inherit.js';
 import getScreenXY from './getScreenXY.js';
 import walker from "./DOM_Iterator.js";
+import EventPool from "./EventPool";
 
 
 const M = (function () {
@@ -43,6 +44,7 @@ const M = (function () {
   M.inherit = inherit;
   M.getScreenXY = getScreenXY;
   M.NodeWalker = walker;
+  M.EventPool = EventPool;
 
 //---------------------
   return M;
