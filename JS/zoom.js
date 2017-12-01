@@ -11,7 +11,6 @@ export default function zoom(){
         var w_width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         var scale = 100 * (w_width / 640);
         var html_fs = document.querySelector('html');
-        console.log(w_width);
         if (w_width >= 640) {
             html_fs.style.fontSize = "100px";
         } else {
