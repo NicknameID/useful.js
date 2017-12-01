@@ -20,6 +20,7 @@ import inherit from './inherit.js';
 import getScreenXY from './getScreenXY.js';
 import walker from "./DOM_Iterator.js";
 import EventPool from "./EventPool";
+import zoom from "./zoom.js";
 
 
 const M = (function () {
@@ -42,9 +43,11 @@ const M = (function () {
   M.delCookie = delCookie; //删除cookie
   M.Slider = Slider; //没啥用的轮播图插件
   M.inherit = inherit; //面向对象编程时，用于两个构造函数之间的继承
-  M.getScreenXY = getScreenXY; //
+  M.getScreenXY = getScreenXY; //获取屏幕上的xy坐标点
   M.NodeWalker = walker;   //DOM节点遍历器
   M.EventPool = EventPool; //全局自定义事件机制，有register、dispatch、remove、namespace方法
+  M.zoom = zoom;  //适配手机端页面的尺寸
+
 
 //---------------------
   return M;
