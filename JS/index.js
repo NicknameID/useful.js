@@ -21,6 +21,7 @@ import getScreenXY from './getScreenXY.js';
 import walker from "./DOM_Iterator.js";
 import EventPool from "./EventPool";
 import zoom from "./zoom.js";
+import equals from "./equals";
 
 
 const M = (function () {
@@ -47,6 +48,7 @@ const M = (function () {
   M.NodeWalker = walker;   //DOM节点遍历器
   M.EventPool = EventPool; //全局自定义事件机制，有register、dispatch、remove、namespace方法
   M.zoom = zoom;  //适配手机端页面的尺寸
+  M.equals = equals; //Object.is方法实现的判断js中任意对象的值是否相等；
 
 
 //---------------------

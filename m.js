@@ -82,26 +82,26 @@ var M = (function(){
 
 	// ajax方法
 	M.AjaxPromise = function(url){
-    let promise =  new Promise(function(resolve, reject) {
-      let client = new XMLHttpRequest();
-      client.open('GET', url+'?t='+new Date().getTime(), true);
-      client.send();
-      client.onreadystatechange = handler;
-      function handler(){
-        if(this.readyState !== 4){
-          return;
-        }
-				if(this.readyState === 4){
-					if( this.status === 200 ){
-						resolve(this.response);
-					}else{
-						reject(new Error(this.statusText));
+		let promise =  new Promise(function(resolve, reject) {
+		let client = new XMLHttpRequest();
+		client.open('GET', url+'?t='+new Date().getTime(), true);
+		client.send();
+		client.onreadystatechange = handler;
+		function handler(){
+			if(this.readyState !== 4){
+			return;
+			}
+					if(this.readyState === 4){
+						if( this.status === 200 ){
+							resolve(this.response);
+						}else{
+							reject(new Error(this.statusText));
+						}
 					}
-				}
-      }
-    });
-    return promise;
-  };
+		}
+		});
+		return promise;
+	};
 
 	M.Ajax = function Ajax(url,fnS,fnF){
 		let client = new XMLHttpRequest();
@@ -167,6 +167,15 @@ var M = (function(){
 		}
 		return result;
 	};
+
+	// Object.is方法实现的判断js中任意对象的值是否相等
+	M.equals = function(parm1, parm2){
+		if( Object.is ){
+			return Object.is( parm1, parm2 );
+		}else{
+			return parm1 === parm2;
+		}
+	}
 
 
 
